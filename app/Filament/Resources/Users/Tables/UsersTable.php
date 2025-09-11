@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use App\Models\User;
 
 class UsersTable
@@ -20,6 +21,9 @@ class UsersTable
                     ->circular()
                     ->size(80)
                     ->label('Foto Profile'),
+                TextColumn::make('name')->label('Nama'),
+                TextColumn::make('email')->label('Email'),
+                TextColumn::make('role')->label('Role')
             ])
             ->filters([
                 //
