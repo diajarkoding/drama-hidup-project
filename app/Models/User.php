@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $this->hasMany(UnlockedEpisode:: class) ;
     }
 
-    public function watchProgresses () {
+    public function WatchProgresss () {
         return $this->hasMany(WatchProgress:: class) ;
     }
 }

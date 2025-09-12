@@ -31,8 +31,8 @@ class SeriesEpisode extends Model
         return $this->hasMany(UnlockedEpisode::class);
     }
 
-    public function watchProgresses()
+    public function WatchProgresss()
     {
-        return $this->hasMany(WatchProgresse::class);
+        return $this->hasMany(WatchProgress::class);
     }
 }
