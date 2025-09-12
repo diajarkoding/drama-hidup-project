@@ -14,12 +14,15 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use UnitEnum;
 
 class WalletResource extends Resource
 {
     protected static ?string $model = Wallet::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWallet;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen User';
 
     public static function canEdit(Model $record): bool
     {
