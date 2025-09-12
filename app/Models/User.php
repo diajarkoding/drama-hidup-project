@@ -63,4 +63,13 @@ class User extends Authenticatable
     public function WatchProgresss () {
         return $this->hasMany(WatchProgress:: class) ;
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->wallet()->create();
+        });
+    }
 }
