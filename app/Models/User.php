@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,20 +48,24 @@ class User extends Authenticatable
         ];
     }
 
-    public function wallet () {
-        return $this->hasOne(Wallet:: class) ;
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
     }
 
-    public function topUps () {
-        return $this->hasMany(CoinTopUp:: class) ;
+    public function topUps()
+    {
+        return $this->hasMany(CoinTopUp::class);
     }
 
-    public function unlockedEpisodes () {
-        return $this->hasMany(UnlockedEpisode:: class) ;
+    public function unlockedEpisodes()
+    {
+        return $this->hasMany(UnlockedEpisode::class);
     }
 
-    public function WatchProgresss () {
-        return $this->hasMany(WatchProgress:: class) ;
+    public function WatchProgresss()
+    {
+        return $this->hasMany(WatchProgress::class);
     }
 
     public static function boot()
