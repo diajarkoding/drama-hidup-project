@@ -20,10 +20,12 @@ class CoinTopUpResource extends Resource
 {
     protected static ?string $model = CoinTopUp::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
     protected static string|UnitEnum|null $navigationGroup = 'Koin';
+
     protected static ?string $navigationLabel = 'Top Up Koin';
+
     protected static ?string $pluralModelLabel = 'Top Up Koin';
 
     public static function canEdit(Model $record): bool

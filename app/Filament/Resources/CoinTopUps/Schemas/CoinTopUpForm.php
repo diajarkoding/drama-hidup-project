@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\CoinTopUps\Schemas;
 
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
-use App\Models\User;
 
 class CoinTopUpForm
 {
@@ -15,30 +14,32 @@ class CoinTopUpForm
         return $schema
             ->components([
                 TextInput::make('code')
-                ->default('TOPUP-' . Str::random(10))
-                ->readOnly(),
+                    ->default('TOPUP-'.Str::random(10))
+                    ->readOnly(),
 
                 // lebih baik pakai relationship => otomatis lazy & searchable
                 Select::make('user_id')
                     ->label('User')
                     ->searchable()
+                    ->preload()
                     ->relationship('user', 'name')
                     ->required(),
+
                 Select::make('coin_package_id')
                     ->label('Paket Koin')
                     ->searchable()
+                    ->preload()
                     ->relationship('package', 'title')
                     ->required(),
 
                 Select::make('status')
-                ->label('Status')
-                ->options([
-                    'pending' => 'Pending',
-                    'success' => 'Success',
-                    'failed' => 'Failed',
-                ])
-                ->required(),
+                    ->label('Status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'success' => 'Success',
+                        'failed' => 'Failed',
+                    ])
+                    ->required(),
             ]);
     }
 }
-
