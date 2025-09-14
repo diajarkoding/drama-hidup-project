@@ -1,17 +1,31 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
-// Public routes for authentication
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+// ====================
+// AUTH ROUTES (PUBLIC)
+// ====================
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
-// Protected routes (require Sanctum authentication)
-Route::middleware('auth:sanctum')->group(function () {
+// ====================
+// EMAIL VERIFICATION
+// ====================
+// public route but signed
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
+    ->name('verification.verify')
+    ->middleware('signed');
+
+// ====================
+// AUTH ROUTES (PROTECTED)
+// ====================
+Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::post('/email/resend', [VerificationController::class, 'resend']);
+    // Route::get('/me', [UserController::class, 'profile']);
 });

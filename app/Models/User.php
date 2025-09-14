@@ -48,6 +48,18 @@ class User extends Authenticatable
         ];
     }
 
+    // helper convenience
+    public function hasVerifiedEmail(): bool
+    {
+        return ! is_null($this->email_verified_at);
+    }
+
+    public function markEmailAsVerified()
+    {
+        $this->email_verified_at = now();
+        $this->save();
+    }
+
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
