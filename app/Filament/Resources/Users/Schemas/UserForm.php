@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
 class UserForm
 {
@@ -16,6 +16,8 @@ class UserForm
                 FileUpload::make('profile_picture')
                     ->label('Foto Profile')
                     ->image()
+                    ->disk('public')
+                    ->directory('profile_pictures')
                     ->required(),
                 TextInput::make('name')
                     ->label('Nama')
@@ -29,7 +31,7 @@ class UserForm
                 TextInput::make('password')
                     ->label('Password')
                     ->password()
-                    ->required(fn(string $context): bool => $context === 'create')
+                    ->required(fn (string $context): bool => $context === 'create')
                     ->minLength(8)
                     ->maxLength(255)
                     ->dehydrated(fn ($state) => filled($state)),
