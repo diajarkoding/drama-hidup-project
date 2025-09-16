@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Mail\VerifyEmailMail;
 use App\Models\User;
 use App\Traits\ApiResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -126,13 +127,13 @@ class AuthController extends Controller
     //     ], 'Login successful.', 200);
     // }
 
-    // /**
-    //  * Handle user logout.
-    //  */
-    // public function logout(Request $request)
-    // {
-    //     $request->user()->currentAccessToken()->delete();
+    /**
+     * Handle user logout.
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
 
-    //     return $this->success(null, 'Successfully logged out.', 200);
-    // }
+        return $this->success(null, 'Successfully logged out.', 200);
+    }
 }
